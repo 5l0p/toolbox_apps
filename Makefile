@@ -10,29 +10,26 @@ LUA_OBJ = $(LUA_DIR)/onelua.o
 
 all: textedit filebrowser controls gallery teletype tb_lua
 
-bin/:
-	mkdir -pv bin/
-
 # Lua core and libraries as one object (onelua.c without its main()).
 $(LUA_OBJ): $(LUA_DIR)/onelua.c
 	$(CC) -O2 -DMAKE_LIB -DLUA_USE_LINUX -c -o $@ $<
 
-tb_lua: tb_lua.c $(HDRS) $(LUA_OBJ) bin/
+tb_lua: tb_lua.c $(HDRS) $(LUA_OBJ) 
 	$(CC) $(CFLAGS) -I$(LUA_DIR) -o bin/$@ tb_lua.c $(LUA_OBJ) $(LDFLAGS) $(LDLIBS) -lm -ldl
 
-textedit: textedit.c $(HDRS) bin/
+textedit: textedit.c $(HDRS) 
 	$(CC) $(CFLAGS) -o bin/$@ textedit.c $(LDFLAGS) $(LDLIBS)
 
-filebrowser: filebrowser.c $(HDRS) bin/
+filebrowser: filebrowser.c $(HDRS) 
 	$(CC) $(CFLAGS) -o bin/$@ filebrowser.c $(LDFLAGS) $(LDLIBS)
 
-controls: controls.c $(HDRS) bin/
+controls: controls.c $(HDRS) 
 	$(CC) $(CFLAGS) -o bin/$@ controls.c $(LDFLAGS) $(LDLIBS)
 
-gallery: gallery.c $(HDRS) bin/
+gallery: gallery.c $(HDRS) 
 	$(CC) $(CFLAGS) -o bin/$@ gallery.c $(LDFLAGS) $(LDLIBS)
 
-teletype: teletype.c $(HDRS) bin/
+teletype: teletype.c $(HDRS) 
 	$(CC) $(CFLAGS) -o bin/$@ teletype.c $(LDFLAGS) $(LDLIBS)
 
 clean:
