@@ -8,7 +8,7 @@ HDRS = deps/toolbox.h/*.h
 LUA_DIR = deps/lua
 LUA_OBJ = $(LUA_DIR)/onelua.o
 
-all: textedit codeedit filebrowser controls gallery teletype tb_lua
+all: textedit codeedit filebrowser controls gallery teletype tb_lua sheet
 
 # Lua core and libraries as one object (onelua.c without its main()).
 $(LUA_OBJ): $(LUA_DIR)/onelua.c
@@ -34,6 +34,9 @@ gallery: gallery.c $(HDRS)
 
 teletype: teletype.c teletype.h $(HDRS) 
 	$(CC) $(CFLAGS) -o bin/$@ teletype.c $(LDFLAGS) $(LDLIBS)
+
+sheet: sheet.c $(HDRS)
+	$(CC) $(CFLAGS) -o bin/$@ sheet.c $(LDFLAGS) $(LDLIBS)
 
 clean:
 	rm -fv bin/* $(LUA_OBJ)
